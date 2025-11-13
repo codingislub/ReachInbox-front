@@ -36,7 +36,7 @@ export default function Filters({ metadata, onFilterChange }: FiltersProps) {
   const handleFilterChange = (key: keyof FilterState, value: string) => {
     const newFilters = { ...filters, [key]: value };
     
-    // Reset folder when account changes
+  // ...existing code...
     if (key === 'account') {
       newFilters.folder = '';
     }

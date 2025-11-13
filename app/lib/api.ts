@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-// Normalize API base URL provided via NEXT_PUBLIC_API_URL
-// Removes a trailing slash if present and falls back to a sensible default.
-const API_BASE_URL = (() => {
-  const raw = process.env.NEXT_PUBLIC_API_URL;
-  if (!raw) return 'http://localhost:3001';
-  return raw.replace(/\/$/, '');
-})();
+// Normalize API base URL so that it always includes the "/api" prefix.
+// Examples:
+// - NEXT_PUBLIC_API_URL="https://reachinbox.aryan.college" => https://reachinbox.aryan.college/api
+// - NEXT_PUBLIC_API_URL="https://reachinbox.aryan.college/" => https://reachinbox.aryan.college/api
+// - NEXT_PUBLIC_API_URL="https://reachinbox.aryan.college/api" => stays as-is
+// - Fallback (dev): http://localhost:3001/api
+const RAW_API_BASE = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001').replace(/\/+$/, '');
+const API_BASE_URL = RAW_API_BASE.endsWith('/api') ? RAW_API_BASE : `${RAW_API_BASE}/api`;
 
 export interface Attachment {
   filename: string;

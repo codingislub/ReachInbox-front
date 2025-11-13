@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "nodemon --exec ts-node backend/src/index.ts",
-    "dev:frontend": "next dev",
+    "dev": "next dev",
   "build": "next build",
     "build:backend": "tsc -p backend/tsconfig.json",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
